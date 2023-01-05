@@ -1,0 +1,20 @@
+{% extends 'base.html' %} 
+
+{% block header %}
+  <h3>{% block title %}DDENT FHIR CodeSystems{% endblock %}</h3>
+{% endblock %} 
+
+{% block content %}      
+    <table class='table table-sm table-striped'>
+        <tr><th>ID</th><th>Name</th><th>URL</th><th>Description</th></tr>
+        {% for cs in codesystems %}
+            <tr>
+                <td>{{cs['id']}}</td>
+                <td><a href="{{url_for('codesystem.show', url=cs['url'])}}">{{cs['name']}}</a></td>
+                <td>{{cs['url']}}</td>
+                <td>{{cs['description']}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
+        

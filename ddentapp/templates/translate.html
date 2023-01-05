@@ -1,0 +1,23 @@
+{% extends 'base.html' %} 
+
+{% block header %}
+  <h3>{% block title %}FHIR Translations: {{code}}{% endblock %}</h3>
+{% endblock %} 
+
+{% block content %} 
+    <p><strong>{{display}}</strong></p>
+    <p>System: <a href="{{url_for('codesystem.show', url=system)}}">{{system.split("/")[-1]}}</a></p>
+    <hr>
+
+    <table class='table table-sm table-striped'>
+        <tr><th>Code</th><th>Display</th><th># Transforms</th><th>System</th></tr>
+        {% for match in matches %} 
+            <tr>
+                <td><a href="{{match['code-url']}}">{{match['code']}}</a></td>
+                <td>{{match['display']}}</td>
+                <td>{{count_translations(match['source-url'], match['code'])}} </td>
+                <td><a href="{{match['source-url']}}">{{match['source-url'].split("/")[-1]}}</a></td>
+            </tr>
+        {% endfor %} 
+    </table>
+{% endblock %}

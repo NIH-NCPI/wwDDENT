@@ -1,0 +1,39 @@
+{% extends 'base.html' %} 
+
+{% block header %}
+  <h3>{% block title %}FHIR ConceptMaps{% endblock %}</h3>
+{% endblock %} 
+
+<h3>Dataset to CUI</h3>
+{% block content %}   
+    <table class='table table-sm table-striped'>
+        <tr><th>ID</th><th>Type</th><th>Name</th><th>Title</th><th>URL</th><th>Description</th></tr>
+
+        {% for cm in dds %}
+            <tr>
+                <td>{{cm['id']}}</td>
+                <td>CUI to DD</td>
+                <td><a href="{{url_for('conceptmap.show', url=cm['url'])}}">{{cm['name']}}</a></td>
+                <td>{{cm['title']}}</td>
+                <td>{{cm['url']}}</td>
+                <td>{{cm['description']}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h3>CUI to Dataset</h3>
+    <table class='table table-sm table-striped'>
+        <tr><th>ID</th><th>Type</th><th>Name</th><th>Title</th><th>URL</th><th>Description</th></tr>
+
+        {% for cm in cuis %}
+            <tr>
+                <td>{{cm['id']}}</td>
+                <td>CUI to DD</td>
+                <td><a href="{{url_for('conceptmap.show', url=cm['url'])}}">{{cm['name']}}</a></td>
+                <td>{{cm['title']}}</td>
+                <td>{{cm['url']}}</td>
+                <td>{{cm['description']}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

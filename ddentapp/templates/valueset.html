@@ -1,0 +1,31 @@
+{% extends 'base.html' %} 
+
+{% block header %}
+  <h3>{% block title %}FHIR ValueSet {{vs['name']}}{% endblock %}</h3>
+{% endblock %} 
+
+{% block content %} 
+	{% if vs %}
+		<table class='table table-sm table-striped'>
+			<tr><th>Name</th><td>{{vs['name']}}</td></tr>
+			<tr><th>url</th><td>{{vs['url']}}</td></tr>
+			<tr><th>Title</th><td>{{vs['title']}}</td></tr>
+			<tr><th>Description</th><td>{{vs['description']}}</td></tr>
+		</table>
+
+		{% for url in included_systems %} 
+			<h3>{{included_systems[url][0][1]}}</a></h3>
+			<a href='{{included_systems[url][0][0]}}'>Source CodeSystem</a>
+			<hr>
+			<table class='table table-sm table-striped'>
+				<tr><th>Code</th><th>Display</th></tr>
+				{% for code in included_systems[url][1] %} 
+					<tr><td><a href="{{code['url']}}">{{code['code']}}</a><td>{{code['display']}}</td></tr>
+				{% endfor %}
+			</table>
+		{% endfor %}
+	{% else %} 
+			There was no ValueSet found for that URL. Perhaps it hasn't been full integrated 
+			and you should <a href="{{url_for('valueset.show', url=url)}}">Try again.</a>
+	{% endif %}
+{% endblock %}

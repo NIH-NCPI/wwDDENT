@@ -1,0 +1,31 @@
+{% extends 'base.html' %} 
+
+{% block header %}
+  <h3>{% block title %}Data Dictionary Extraction and NLP Tool{% endblock %}</h3>
+{% endblock %} 
+
+{% block content %} 
+  <p>Welcome to the DDENT demo website. This website is intended to demonstrate 
+  how one might use FHIR to store associations between dataset variables and 
+  the relevant Concept Unique Identifiers (CUIs) identified via running an 
+  NLP extraction on the variable's description. </p>
+
+  <p>The website uses only FHIR to store data and currently relies solely on 
+  the following resource types:</p>
+  <ul>
+      <li><a href="http://hl7.org/fhir/R4/codesystem.html">CodeSystem</a></li>
+      <li><a href="http://hl7.org/fhir/R4/valueset.html">ValueSet</a></li>
+      <li><a href="http://hl7.org/fhir/R4/conceptmap.html">ConceptMap</a></li>
+  </ul>
+
+  <p>To get started, feel free to navigate over to the <a href="{{urls['dbgap']}}">
+  DbGAP Study Page</a>. Once there, you are welcome to explore any of the datasets
+  have already been loaded including the ability to click on links to view translation
+  functionality for various IDs that have been added to this system. This site 
+  is also open to permit users to <a href="{{urls['dbgap-new']}}"> load additional 
+  studies</a> from DbGAP using accession IDs. </p>
+
+  <p>In addition to the ConceptMaps, users can also look around at the <a href="{{urls['codesystem']}}">
+  CodeSystems</a> and <a href="{{urls['valueset']}}">ValueSets.</a>
+  </p>
+  {% endblock %}

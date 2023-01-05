@@ -1,0 +1,46 @@
+{% extends 'base.html' %} 
+
+{% block header %}
+  <h3>{% block title %}FHIR ConceptMap {{cm['name']}}{% endblock %}</h3>
+{% endblock %} 
+
+{% block content %}     
+    <p>The FHIR ConceptMap provides the ability to map codes from one system to another. 
+    The links for the codes below perform a FHIR translation for the specified code. </p>
+
+    <table class='table table-sm table-striped'>
+        <tr><th>ID</th><td>{{cm['id']}}</td></tr>
+        <tr><th>Title</th><td>{{cm['title']}}</td></tr>
+        <tr><th>Description</th><td>{{cm['description']}}</td></tr>
+        <tr><th>URL</th><td>{{cm['url']}}</td></tr>
+        <tr><th>Source</th><td><a href="{{url_for('valueset.show', url=cm['sourceUri'])}}">Source ValueSet {{cm['sourceUri']}}</a></td></tr>
+        <tr><th>Target</th><td><a href="{{url_for('valueset.show', url=cm['targetUri'])}}">Target ValueSet {{cm['targetUri']}}</a></td></tr>
+    </table>
+    <br></br>
+    
+    <h3>Groups</h3>
+    <br>
+    {% for group in cm['group'] %} 
+        <p><strong>Source</strong> <a href="{{url_for('codesystem.show', url=group['source'])}}">{{group['source']}}</a></p>
+        <p><strong>Target</strong> <a href="{{url_for('codesystem.show', url=group['target'])}}">{{group['target']}}</a></p>
+        <hr>
+        <table class='table table-sm table-striped'>
+            <tr><th>Code</th><th>Display</th><th># Translations</th><th>Target Code</th><th>Target Display</th><th># Translations</th><th>Comment</th></tr>
+            {% for element in group['element'] %}
+                {% for code in element['target'] %} 
+                    <tr>
+                        <td><a href="{{url_for('translate_code.translate', system=group['source'], code=element['code'])}}">{{element['code']}}</a></td>
+                        <td>{{element['display']}}</td>
+                        <td>{{count_translations(group['source'], element['code'])}} </td>
+                        <td><a href="{{url_for('translate_code.translate', system=group['target'], code=code['code'])}}">{{code['code']}}</a></td>
+                        <td>{{code['display']}}</td>
+                        <td>{{count_translations(group['target'], code['code'])}} </td>
+                        <td>{{code['comment'] | safe}}</td>
+                    </tr>
+                {% endfor %} 
+            {% endfor %} 
+        </table>
+        <br>
+    {% endfor %}
+
+{% endblock %} 

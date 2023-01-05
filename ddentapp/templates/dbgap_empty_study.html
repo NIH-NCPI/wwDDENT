@@ -1,0 +1,10 @@
+{% extends 'base.html' %} 
+
+{% block header %}
+  <h3>{% block title %}No CUIs Found{% endblock %}</h3>
+{% endblock %} 
+
+{% block content %} 
+  <p>The study, {{accid}}, didn't yeild any tables with recognizable CUIs and wasn't 
+      able to be imported into the system. Perhaps the study hasn't been fully loaded yet.</p>
+{% endblock %}

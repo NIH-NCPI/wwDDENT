@@ -1,0 +1,13 @@
+activate
+asdf.py
+fhir_hosts
+run-me.ps1 
+
+# This contains semi-sensitive info, so 
+# ignoring it. However, it is required for
+# things to run
+instance
+__pycache__
+.eggs
+
+WebDDENT.egg-info

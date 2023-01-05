@@ -1,0 +1,28 @@
+{% extends 'base.html' %} 
+
+{% block header %}
+  <h3>{% block title %}Load Study From DbGAP{% endblock %}</h3>
+{% endblock %} 
+
+{% block content %} 
+<p>To load a study from DbGAP, please provide the study's accession id along with 
+some basic details that may provide some insight to what might be found inside it.</p> 
+
+  <form method="post">
+    <table class='table table-sm'>
+      <tr>
+        <th><label for="accession_id">DbGAP Accession ID</label></th>
+        <td><input name="accession_id" id="accession_id" required></td>
+      </tr>
+      <tr>
+        <th><label for="title">Study Title</label></th>
+        <td><input name="title" id="title" required></td>
+      </tr>
+      <tr>
+        <th><label for="description">Study Description</label></th>
+        <td><input name="description" id="description" required></td>
+      </td>
+      <tr><td></td><td><input type="submit" value="Import"></p></td></tr>
+      </table>  
+  </form>
+{% endblock %}
